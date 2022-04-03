@@ -146,14 +146,7 @@
                 echo $photo_html; 
         }
             ?>
-            <figure>
-                <img src="https://tigu.hk.tlu.ee/~andrus.rinde/media/photos/HK_600x400/IMG_3255.JPG"
-                    alt="TLÜ Haapsalu Kolledzi hoone" class="photoframe">
-                <figcaption>Vaade TLÜ Haapsalu kolledži hoonele</figcaption>
-            </figure>
-            <img src="https://tigu.hk.tlu.ee/~andrus.rinde/media/photos/HK_600x400/IMG_4751.JPG"
-                alt="TLÜ Haapsalu Kolledzi klassiruum 205" class="photoframe">
-            <figcaption>Vaade klassiruumi 205</figcaption>
+            
         </section>
 
     </main>
