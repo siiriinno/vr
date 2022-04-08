@@ -1,11 +1,7 @@
 <?php
 require_once "../../cnf.php";
 require_once "hc_news.php";
-//require_once "fnc_general.php";
-//$_POST
-//$_GET
-//var_dump($_POST);
-//echo $_POST["newsInput"];
+
 $author_name = "Siiri Inno";
 
 $news_input_error = null;
