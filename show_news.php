@@ -1,18 +1,7 @@
 <?php
     require_once "../../cnf.php";
     require_once "hc_news.php";
-    //require_once "fnc_general.php";
-    //$_POST
-    //$_GET
-    //var_dump($_POST);
-    //echo $_POST["newsInput"];
     $author_name = "Siiri Inno";
-
-   
-
-    
-
-
 ?>
 <!DOCTYPE html>
 <html lang="et">
@@ -48,12 +37,13 @@
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3.html">Gradient</a></li>
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3gradient2.html">Gradient2</a></li>
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
+            <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
+            <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
         </ul>
     </nav>
     <main>
         <section>
             <h2>Uudised</h2>
-            
             <?php echo all_news(); ?>
         </section>
     </main>

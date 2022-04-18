@@ -1,7 +1,11 @@
 <?php
 require_once "../../cnf.php";
 require_once "hc_news.php";
-
+//require_once "fnc_general.php";
+//$_POST
+//$_GET
+//var_dump($_POST);
+//echo $_POST["newsInput"];
 $author_name = "Siiri Inno";
 
 $news_input_error = null;
@@ -22,7 +26,7 @@ if (isset($_POST["newsSubmit"])) {
     }
     //kontrollime uudise sisu
     if (isset($_POST["titleInput"]) and !empty($_POST["titleInput"])) {
-        $news_input = $_POST["titleInput"];
+        $news_input = $_POST["newsInput"];
     } else {
         $news_input_error .= "Uudise sisu on puudu! ";
 
@@ -73,6 +77,8 @@ if (isset($_POST["newsSubmit"])) {
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3.html">Gradient</a></li>
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3gradient2.html">Gradient2</a></li>
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
     </ul>
 </nav>
 <main>

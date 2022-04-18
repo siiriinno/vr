@@ -73,7 +73,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <!-- nüüd on teil senisele lisaks mõõtühikud vw 1% laiusest, vh, vmin 1% väiksemast mõõdust, vmax -->
-    <title><?php echo $author_name; ?> koduleht</title>
+    <title><?php echo $author_name; ?> koduleht
+    </title>
     <link rel="stylesheet" type="text/css" href="../Styles/general.css">
 </head>
 
