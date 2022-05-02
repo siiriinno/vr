@@ -1,4 +1,5 @@
 <?php
+require_once "use_session.php";
 require_once "../../cnf.php";
 require_once "hc_news.php";
 //require_once "fnc_general.php";
@@ -83,7 +84,7 @@ if (isset($_POST["newsSubmit"])) {
 </nav>
 <main>
     <section>
-         <h2>Lisa uudis</h2>
+        <h2>Lisa uudis</h2>
         <form method="POST">
             <label for="titleInput">Uudise pealkiri</label>
             <input type="text" id="titleInput" name="titleInput" placeholder="Kirjuta siia pealkiri...">

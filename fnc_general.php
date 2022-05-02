@@ -16,3 +16,11 @@ function check_if_photo($all_files, $photo_dir,  $allowed_photo_types) {
     }
     return $photo_files; 
 }
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
