@@ -14,7 +14,7 @@
 <body>
     <header>
         <img src="../../~andrus.rinde/media/pic/rif21_banner.png" alt="RIF bänner">
-        <h1>Tere <?php echo $author_name; ?> veebirakenduse tund</h1>
+        <!--h1>Tere <?php echo $author_name; ?> veebirakenduse tund</h1!-->
         
         <p></p>
         <details>

@@ -52,7 +52,7 @@ function sign_in($email, $password)
             $stmt = $conn->prepare("SELECT id, firstname, lastname FROM vr22_users WHERE email = ?");
             echo $conn->error;
             $stmt->bind_param("s", $email);
-            $stmt->bind_result($id_from_db, $firstname_from_db, $lastname_from_db, $password_from_db);
+            $stmt->bind_result($id_from_db, $firstname_from_db, $lastname_from_db);
             $stmt->execute();
             if ($stmt->fetch()) {
                 echo "küsime juurde";
