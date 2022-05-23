@@ -140,6 +140,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3.html">Gradient</a></li>
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3gradient2.html">Gradient2</a></li>
         <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/gallery_photoupload.php">Piltide üleslaadimine</a></li>
+        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_photos.php">Vaata pilte</a></li>
     </ul>
 </nav>
 

@@ -15,8 +15,10 @@ GROUP BY vr22_photos.id");
     $stmt->bind_result($id_from_db, $filename_from_db, $alttext_from_db, $first_name_from_db, $last_name_from_db);
     $stmt->execute();
     while ($stmt->fetch()) {
+        $gallery_html .= "<div>";
         $gallery_html .= "<img src=\"gallery_upload_thumb/" . $filename_from_db . "\" alt=\"" . $alttext_from_db . "\" class=\"thumbs\"> \n";
         $gallery_html .= "<p>Autor:" . $first_name_from_db . " " . $last_name_from_db . "</p> \n";
+        $gallery_html .= "</div>";
     }
     $stmt->close();
     $conn->close();
