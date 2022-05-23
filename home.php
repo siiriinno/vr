@@ -38,6 +38,7 @@
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
             <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
+            <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/gallery_photoupload.php">Piltide üleslaadimine</a></li>
         </ul>
     </nav>
     <main>

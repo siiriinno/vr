@@ -3,6 +3,7 @@ session_start();
 require_once "../../cnf.php";
 require_once "fnc_general.php";
 require_once "fnc_user.php";
+require_once "hc_photos.php";
 $notice = null;
 $email = null;
 $email_error = null;
@@ -195,6 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         ?>
 
+    </section>
+    <section>
+        <h2>Pildid</h2>
+        <div class="thumbgallery">
+            <?php echo last_photo(); ?>
+        </div>
     </section>
 
 </main>
