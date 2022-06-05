@@ -83,7 +83,7 @@ function store_photo_data($file_name, $alt, $privacy)
     echo $conn->error;
     $stmt->bind_param("issi", $_SESSION["user_id"], $file_name, $alt, $privacy);
     if ($stmt->execute()) {
-        $notice = "Foto lisati andmebaasi!";
+        $notice = $conn->insert_id;//"Foto lisati andmebaasi!";
     } else {
         $notice = "Foto lisamisel andmebaasi tekkis tõrge: " . $stmt->error;
     }

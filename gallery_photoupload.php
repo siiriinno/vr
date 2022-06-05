@@ -3,6 +3,18 @@ require_once "use_session.php";
 require_once "../../cnf.php";
 require_once("fnc_general.php");
 require_once "fnc_photoupload.php";
+require_once "classes/Photoupload.class.php";
+
+//testin klassi kasutamist
+require_once "classes/Generic.class.php";
+$generic_object = new Generic(8);
+//väljastan salajas eväärtuse:
+//echo $generic_object->secret_value;
+//väljastame avaliku väärtuse
+echo "Klassi avalik väärtus on:".$generic_object->just_value;
+$generic_object->reveal();
+unset($generic_object);
+
 
 $photo_error = null;
 $photo_upload_notice = null;
@@ -18,6 +30,7 @@ $photo_name_prefix = "vr_";
 $normal_photo_max_width = 600;
 $normal_photo_max_height = 400;
 $thumbnail_width = $thumbnail_height = 100;
+$watermark = "hkphotos/vr_watermark.png";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -27,15 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         //var_dump($_FILES);
         // kas on olemas pilt
         if (isset($_FILES["photo_input"]["tmp_name"]) and !empty($_FILES["photo_input"]["tmp_name"])) {
-
+            //kui pilt valitud
+            //kas on foto
             $image_check = getimagesize($_FILES["photo_input"]["tmp_name"]);
 
             if ($image_check !== false) {
-                if ($image_check["mime"]  =="image/jpeg") {
+                if ($image_check["mime"] == "image/jpeg") {
                     $file_type = "jpg";
                 }
                 if ($image_check["mime"] == "image/png") {
-                    $file_type ="png";
+                    $file_type = "png";
                 }
                 if ($image_check["mime"] == "image/gif") {
                     $file_type = "gif";
@@ -61,27 +75,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             //kui kõik on korras, siis laeme üles
             if ($photo_error == null) {
 
+                //võtame kasutusele klassi
+                $upload = new Photoupload($_FILES["photo_input"], $file_type);
+
                 //loon uue failinime
                 $file_name = create_filename($photo_name_prefix, $file_type);
 
                 //suuruse muutmine
-                $my_temp_image = create_image($_FILES["photo_input"]["tmp_name"], $file_type);
-                $my_normal_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
-                //salvestame vähendatud pildifaili
-                $photo_upload_notice = save_image($my_normal_image, $gallery_photo_normal_folder .$file_name, $file_type);
+                //$my_temp_image = create_image($_FILES["photo_input"]["tmp_name"], $file_type);
+               // $my_normal_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
 
-                $my_thumb_image = resize_photo($my_temp_image, $thumbnail_width, $thumbnail_height, false);
-                $photo_upload_notice = save_image($my_thumb_image, $gallery_photo_thumb_folder .$file_name, $file_type);
+                //suuruse muutmine klassiga
+                $upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
+
+                //lisan vesimärgi
+                $upload->add_watermark($watermark);
+
+                //salvestame vähendatud pildifaili
+                //$photo_upload_notice = save_image($my_normal_image, $gallery_photo_normal_folder . $file_name, $file_type);
+                $photo_upload_notice = "Normaalsuuruses" .$upload->save_image($gallery_photo_normal_folder .$file_name);
+
+                //thumbnail ka
+                //$my_thumb_image = resize_photo($my_temp_image, $thumbnail_width, $thumbnail_height, false);
+                //$photo_upload_notice = save_image($my_thumb_image, $gallery_photo_thumb_folder . $file_name, $file_type);
+                $upload->resize_photo($thumbnail_width, $thumbnail_height);
+                $photo_upload_notice .=" Pisipildi " .$upload->save_image($gallery_photo_thumb_folder .$file_name);
 
                 //kopeerime originaali soovitud kohta
-                move_uploaded_file($_FILES["photo_input"]["tmp_name"], $gallery_photo_orig_folder .$file_name);
+                //move_uploaded_file($_FILES["photo_input"]["tmp_name"], $gallery_photo_orig_folder . $file_name);
+                $upload->save_file($gallery_photo_orig_folder . $file_name);
 
                 //talletame andmebaasi
-                $photo_upload_notice .= store_photo_data($file_name, $_POST["alt_input"],$_POST["privacy_input"]);
+                $photo_upload_notice .= store_photo_data($file_name, $_POST["alt_input"], $_POST["privacy_input"]);
 
                 //tühjendame mälu
-                imagedestroy( $my_temp_image );
-                imagedestroy( $my_normal_image );
+                //imagedestroy($my_temp_image);
+                //imagedestroy($my_normal_image);
+                //laseme klassil minna...lheb käima konstruktor - hävitab elemendid ära
+                unset($upload);
             }
         } else {
             $photo_error = "pildifail pole valitud";
