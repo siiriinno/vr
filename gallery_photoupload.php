@@ -15,26 +15,24 @@ echo "Klassi avalik väärtus on:".$generic_object->just_value;
 $generic_object->reveal();
 unset($generic_object);
 
-
 $photo_error = null;
 $photo_upload_notice = null;
 $alt_text = null;
 $privacy = 1;
 $file_name = null;
 $file_type = null;
-$photo_upload_site_limit = 1024 * 1024 * 1.2;
-$gallery_photo_orig_folder = "gallery_upload_orig/";
+//muutujad mis võiks olla conf failis
+$photo_upload_site_limit = 1024 * 1024 * 1.5;
+/*$gallery_photo_orig_folder = "gallery_upload_orig/";
 $gallery_photo_normal_folder = "gallery_upload_normal/";
-$gallery_photo_thumb_folder = "gallery_upload_thumb/";
+$gallery_photo_thumb_folder = "gallery_upload_thumb/";*/
 $photo_name_prefix = "vr_";
 $normal_photo_max_width = 600;
 $normal_photo_max_height = 400;
 $thumbnail_width = $thumbnail_height = 100;
 $watermark = "hkphotos/vr_watermark.png";
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     if (isset($_POST["photo_submit"])) {
         //var_dump($_POST);
         //var_dump($_FILES);
@@ -131,6 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?> teeb veebi</title>
         <link rel="stylesheet" type="text/css" href="../Styles/general.css">
+        <script src="javascript/fileCheck.js" defer></script>
     </head>
 <body>
     <header>
@@ -180,9 +179,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } ?>>
             <label for="privacy_input_3">Avalik (kأµik nأ¤evad)</label>
             <br>
-            <input type="submit" name="photo_submit" value="Lae pilt üles">
+            <input type="submit" name="photo_submit" id="photo_submit" value="Lae pilt üles">
         </form>
-        <span><?php echo $photo_upload_notice; ?></span>
+        <span id="notice"><?php echo $photo_upload_notice; ?></span>
     </section>
 <?php
 require_once "pagefooter.php";

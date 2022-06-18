@@ -23,11 +23,20 @@ $normal_photo_max_height = 400;
 $news_photo_normal_folder = "news_upload_normal/";
 $news_photo_orig_folder = "news_upload_orig/";
 
+if (isset($_GET["id"])) {
+    $uudis = get_news($_GET["id"]);
+    //print_r($uudis);
+}
 
 if (isset($_POST["newsSubmit"])) {
     //print_r($_POST);
     //kontrolli kas pilt ka on
-    $news_photo_id = null;
+    if (isset($uudis)) {
+        $news_photo_id = $uudis[5];
+    } else {
+        $news_photo_id = null;
+    }
+
     if (isset($_FILES["photo_input"]["tmp_name"]) and !empty($_FILES["photo_input"]["tmp_name"])) {
         $image_check = getimagesize($_FILES["photo_input"]["tmp_name"]);
 
@@ -50,7 +59,7 @@ if (isset($_POST["newsSubmit"])) {
         $file_name = create_filename($photo_name_prefix, $file_type);
         //suuruse muutmine klassiga
         $upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
-        $photo_upload_notice = "Normaalsuuruses" .$upload->save_image($news_photo_normal_folder .$file_name);
+        $photo_upload_notice = "Normaalsuuruses" . $upload->save_image($news_photo_normal_folder . $file_name);
         $upload->save_file($news_photo_orig_folder . $file_name);
         //talletame andmebaasi
         $news_photo_id = store_photo_data($file_name, $_POST["newsInput"], 2);
@@ -80,8 +89,12 @@ if (isset($_POST["newsSubmit"])) {
 
     $notice = $news_input_error;
     if (empty($news_input_error)) {
-
-        $notice = save_news($title_input, $news_input, $expire_input, $news_photo_id);
+    if (isset($uudis)) {
+        $news_id = $uudis[0];
+    } else {
+        $news_id = -1;
+    }
+        $notice = save_news($title_input, $news_input, $expire_input, $news_photo_id, $news_id);
 
     }
 }
@@ -125,19 +138,43 @@ if (isset($_POST["newsSubmit"])) {
 </nav>
 <main>
     <section>
-        <h2>Lisa uudis</h2>
+        <?php
+        if (isset($uudis)) { ?>
+            <h2>Muuda uudist</h2>
+        <?php } else { ?>
+            <h2>Lisa uudis</h2>
+        <?php } ?>
         <form method="POST" enctype="multipart/form-data">
             <label for="titleInput">Uudise pealkiri</label>
-            <input type="text" id="titleInput" name="titleInput" placeholder="Kirjuta siia pealkiri...">
+            <input type="text" id="titleInput" name="titleInput" placeholder="Kirjuta siia pealkiri..."
+                <?php //lisan uudisele pealkirja teksti muutmise
+                if (isset($uudis)) {
+                     echo "value=\"".$uudis[1]."\"";
+                }
+                ?>
+            >
             <br>
             <label for="newsInput">Uudise tekst</label><br>
             <textarea id="newsInput" name="newsInput" cols="60" rows="5"
-                      placeholder="Kirjuta siia uudise tekst..."></textarea>
+                      placeholder="Kirjuta siia uudise tekst..."><?php //lisan uudisele sisuteksti muutmise
+                if (isset($uudis)) {
+                    echo $uudis[2];
+                }
+                ?></textarea>
             <br>
+            <?php if (isset($uudis) && isset($uudis[4])) {
+                echo "<img src='news_upload_normal/" . $uudis[4] . "' alt='" . $uudis[1] . "' class='news-img'>";
+                echo "<br>";
+            } ?>
             <label for="photo_input"> Vali pildifail! </label>
             <input type="file" name="photo_input" id="photo_input" accept="image/png, image/gif, image/jpeg">
             <label for="expireInput">Uudise aegumistähtaeg</label>
-            <input type="date" id="expireInput" name="expireInput">
+            <input type="date" id="expireInput" name="expireInput"
+                <?php //lisan uudisele pealkirja teksti muutmise
+                if (isset($uudis)) {
+                    echo "value=\"".$uudis[3]."\"";
+                }
+                ?>>
             <br>
             <input type="submit" id="newsSubmit" name="newsSubmit" value="Salvesta uudis">
         </form>
