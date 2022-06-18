@@ -89,11 +89,11 @@ if (isset($_POST["newsSubmit"])) {
 
     $notice = $news_input_error;
     if (empty($news_input_error)) {
-    if (isset($uudis)) {
-        $news_id = $uudis[0];
-    } else {
-        $news_id = -1;
-    }
+        if (isset($uudis)) {
+            $news_id = $uudis[0];
+        } else {
+            $news_id = -1;
+        }
         $notice = save_news($title_input, $news_input, $expire_input, $news_photo_id, $news_id);
 
     }
@@ -126,16 +126,7 @@ if (isset($_POST["newsSubmit"])) {
 
     <hr>
 </header>
-<nav>
-    <h2>Olulised lingid</h2>
-    <ul>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3.html">Gradient</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3gradient2.html">Gradient2</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
-    </ul>
-</nav>
+<?php include "nav.php"; ?>
 <main>
     <section>
         <?php
@@ -149,7 +140,7 @@ if (isset($_POST["newsSubmit"])) {
             <input type="text" id="titleInput" name="titleInput" placeholder="Kirjuta siia pealkiri..."
                 <?php //lisan uudisele pealkirja teksti muutmise
                 if (isset($uudis)) {
-                     echo "value=\"".$uudis[1]."\"";
+                    echo "value=\"" . $uudis[1] . "\"";
                 }
                 ?>
             >
@@ -172,7 +163,7 @@ if (isset($_POST["newsSubmit"])) {
             <input type="date" id="expireInput" name="expireInput"
                 <?php //lisan uudisele pealkirja teksti muutmise
                 if (isset($uudis)) {
-                    echo "value=\"".$uudis[3]."\"";
+                    echo "value=\"" . $uudis[3] . "\"";
                 }
                 ?>>
             <br>

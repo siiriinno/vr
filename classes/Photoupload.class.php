@@ -41,7 +41,8 @@ class Photoupload
         return $temp_image;
     }
 
-    public function resize_photo($w, $h, $keep_orig_proportion = true){
+    public function resize_photo($w, $h, $keep_orig_proportion = true)
+    {
         $image_w = imagesx($this->temp_image);
         $image_h = imagesy($this->temp_image);
         $new_w = $w;
@@ -51,22 +52,22 @@ class Photoupload
         $cut_size_w = $image_w;
         $cut_size_h = $image_h;
 
-        if($w == $h){
-            if($image_w > $image_h){
+        if ($w == $h) {
+            if ($image_w > $image_h) {
                 $cut_size_w = $image_h;
                 $cut_x = round(($image_w - $cut_size_w) / 2);
             } else {
                 $cut_size_h = $image_w;
                 $cut_y = round(($image_h - $cut_size_h) / 2);
             }
-        } elseif($keep_orig_proportion){//kui tuleb originaaproportsioone säilitada
-            if($image_w / $w > $image_h / $h){
+        } elseif ($keep_orig_proportion) {//kui tuleb originaaproportsioone säilitada
+            if ($image_w / $w > $image_h / $h) {
                 $new_h = round($image_h / ($image_w / $w));
             } else {
                 $new_w = round($image_w / ($image_h / $h));
             }
         } else { //kui on vaja kindlasti etteantud suurust, ehk pisut ka kärpida
-            if($image_w / $w < $image_h / $h){
+            if ($image_w / $w < $image_h / $h) {
                 $cut_size_h = round($image_w / $w * $h);
                 $cut_y = round(($image_h - $cut_size_h) / 2);
             } else {

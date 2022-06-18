@@ -32,28 +32,16 @@ $author_name = "Siiri Inno";
 
     <hr>
 </header>
-<nav>
-    <h2>Olulised lingid</h2>
-    <ul>
-        <li><a href="#media">Meedia veebilehel</a></li>
-        <li><a href="#gaudeamus">Üliõpilashümn Gaudeamus</a></li>
-        <li><a href="Kodutoo1/index.html">Esimene kodutöö</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3.html">Gradient</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/css3gradient2.html">Gradient2</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/Gradient">Gradient uus</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/show_news.php">Loe uudiseid</a></li>
-        <li><a href="https://tigu.hk.tlu.ee/~siiri.inno/vr/add_news.php">Lisa uudiseid</a></li>
-    </ul>
-</nav>
+<?php include "nav.php"; ?>
 <main>
     <section>
         <!--modaalaken fotode näitamiseks-->
         <dialog id="modal" class="modalarea">
             <span id="modalclose" class="modalclose">&times;</span>
-            <div class ="modalhorizontal">
+            <div class="modalhorizontal">
                 <div class="modalvertical">
                     <p id="modalcaption"></p>
-                    <img id="modalimage" src="empty.png" alt ="Galeriipilt">
+                    <img id="modalimage" src="empty.png" alt="Galeriipilt">
 
                     <br>
                     <input id="rate1" name="rating" type="radio" value="1"><label for="rate1">1</label>

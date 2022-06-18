@@ -11,7 +11,7 @@ $generic_object = new Generic(8);
 //väljastan salajas eväärtuse:
 //echo $generic_object->secret_value;
 //väljastame avaliku väärtuse
-echo "Klassi avalik väärtus on:".$generic_object->just_value;
+echo "Klassi avalik väärtus on:" . $generic_object->just_value;
 $generic_object->reveal();
 unset($generic_object);
 
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //suuruse muutmine
                 //$my_temp_image = create_image($_FILES["photo_input"]["tmp_name"], $file_type);
-               // $my_normal_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
+                // $my_normal_image = resize_photo($my_temp_image, $normal_photo_max_width, $normal_photo_max_height);
 
                 //suuruse muutmine klassiga
                 $upload->resize_photo($normal_photo_max_width, $normal_photo_max_height);
@@ -91,13 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 //salvestame vähendatud pildifaili
                 //$photo_upload_notice = save_image($my_normal_image, $gallery_photo_normal_folder . $file_name, $file_type);
-                $photo_upload_notice = "Normaalsuuruses" .$upload->save_image($gallery_photo_normal_folder .$file_name);
+                $photo_upload_notice = "Normaalsuuruses" . $upload->save_image($gallery_photo_normal_folder . $file_name);
 
                 //thumbnail ka
                 //$my_thumb_image = resize_photo($my_temp_image, $thumbnail_width, $thumbnail_height, false);
                 //$photo_upload_notice = save_image($my_thumb_image, $gallery_photo_thumb_folder . $file_name, $file_type);
                 $upload->resize_photo($thumbnail_width, $thumbnail_height);
-                $photo_upload_notice .=" Pisipildi " .$upload->save_image($gallery_photo_thumb_folder .$file_name);
+                $photo_upload_notice .= " Pisipildi " . $upload->save_image($gallery_photo_thumb_folder . $file_name);
 
                 //kopeerime originaali soovitud kohta
                 //move_uploaded_file($_FILES["photo_input"]["tmp_name"], $gallery_photo_orig_folder . $file_name);
@@ -143,15 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <hr>
     </header>
 
-    <nav>
-        <h2>Olulised lingid</h2>
-        <ul>
-            <li><a href="home.php">Avaleht</a></li>
-            <li><a href="?logout=1">Logi välja!</a></li>
-            <li><a href="https://www.tlu.ee/haapsalu">Tallinna Ülikooli Haapsalu kolledž</a></li>
-
-        </ul>
-    </nav>
+<?php include "nav.php"; ?>
 <main>
     <section>
         <h2>Foto üleslaadimine</h2>

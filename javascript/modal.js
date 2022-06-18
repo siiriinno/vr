@@ -36,15 +36,15 @@ function storeRating() {
             rating = i;
         }
     }
-    if(rating > 0) {
+    if (rating > 0) {
         //salvestame
         //saadame info serverisse PFP skriptile, mis salvestab ja tagastab kliendile värskendatud keskmise hinde
         //AJAX
         //Asynchroneus Javascript And XML
         let webRequest = new XMLHttpRequest();
         //oleme valmis eduks ja kui asjad toimivad, siis jälgime, kas õnnestus
-        webRequest.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
+        webRequest.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
                 //kõik, mida teha, kui tuli vastus
                 document.querySelector("#avgrating").innerHTML = this.responseText;
                 document.querySelector("#storeRating").removeEventListener("click", storeRating);
